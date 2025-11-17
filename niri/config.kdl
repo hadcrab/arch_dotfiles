@@ -6,13 +6,15 @@
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
-// hi 
+// hi
 
 spawn-at-startup "xwayland-satellite"
 environment {
     DISPLAY ":2"
 }
 input {
+    warp-mouse-to-focus mode="center-xy"
+    focus-follows-mouse
     keyboard {
         xkb {
             // You can set rules, model, layout, variant and options.
@@ -331,6 +333,11 @@ window-rule {
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.9
 }
 
 binds {
