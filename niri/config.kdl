@@ -1,17 +1,20 @@
 spawn-at-startup "blueman-applet"
 spawn-at-startup "mako"
 spawn-at-startup "swayidle" "-w"
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "/usr/bin/lxqt-policykit-agent"
+// spawn-at-startup "xwayland-satellite"
 spawn-sh-at-startup "swaybg -m fill -i /home/mihail/Backgrounds/pexels-fatinmark-18656702.jpg"
 spawn-sh-at-startup "waybar -c /home/mihail/.config/waybar/niri/config.jsonc -s /home/mihail/.config/waybar/niri/style.css"
+
+output "eDP-1" {
+	mode "1920x1080@143.998001"
+}
 
 environment {
     DISPLAY ":0"
 }
 input {
     warp-mouse-to-focus mode="center-xy"
-    focus-follows-mouse max-scroll-amount="50%"
+    focus-follows-mouse
     keyboard {
         xkb {
             // You can set rules, model, layout, variant and options.
@@ -59,7 +62,7 @@ input {
     }
 }
 layout {
-    gaps 16
+    gaps 8
 
    center-focused-column "never"
 
@@ -72,7 +75,7 @@ layout {
 
    default-column-width { proportion 0.5; }
     focus-ring {
-       width 4
+       width 3
        inactive-color "#505050"
        active-gradient from="#bdbdbd" to="#5e5e5e" angle=180
    }
@@ -108,7 +111,7 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 5
     clip-to-geometry true
 }
 
@@ -128,8 +131,8 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Super+Alt+X hotkey-overlay-title="Start xwayland-satellite" { spawn-sh "xwayland-satellite :2 && notify-send \" Starting xwayland-satellite\" "; }
 
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- && notify-send \" $(wpctl get-volume @DEFAULT_AUDIO_SINK@)\" "; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ && notify-send \" $(wpctl get-volume @DEFAULT_AUDIO_SINK@)\" "; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01- && notify-send \" $(wpctl get-volume @DEFAULT_AUDIO_SINK@)\" "; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+ && notify-send \" $(wpctl get-volume @DEFAULT_AUDIO_SINK@)\" "; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send \" $(wpctl get-volume @DEFAULT_AUDIO_SINK@)\" "; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && notify-send \" $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)\" "; }
 
@@ -273,4 +276,7 @@ binds {
     Mod+Shift+Ctrl+P hotkey-overlay-title="poweroff" { spawn "systemctl" "poweroff"; }
     Mod+Shift+Ctrl+O hotkey-overlay-title="reboot" { spawn "systemctl" "reboot"; }
     //Mod+Shift+Ctrl+L hotkey-overlay-title="terminate niri session" { spawn "loginctl" "terminate-session" "c1"; }
+
 }
+
+
